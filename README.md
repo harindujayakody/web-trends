@@ -1,6 +1,6 @@
 # Web Trends — Design Gallery
 
-70 web-design concepts from the "Web Design Ideas 2026" Pinterest board
+95 web-design concepts from the "Web Design Ideas 2026" Pinterest board
 (`pinterest.com/harindujayakody/web-design-ideas-2026`), each rebuilt as a
 live, responsive, scroll-animated website.
 
@@ -78,14 +78,39 @@ Open `index.html` for the visual gallery, or jump straight to a design:
 | computer-template068.html | PROS — Smart Financial Service - Open a Card | 314055774039160637 | Bank, save and spend with confidence. PROS brings everyday payments, rewarding c |
 | computer-template069.html | GAMERIX — ключи игр для PC, Xbox и PlayStation | 314055774039190179 | GAMERIX — магазин цифровых ключей для PC, Xbox и PlayStation. Новинки, предзаказ |
 | computer-template070.html | GardenView — Landscaping & Garden Design Services | 314055774039189899 | GardenView creates thoughtful gardens with expert landscape design, careful plan |
+| computer-template071.html | Matras | 314055774039193848 | Russian mattress e-commerce, lavender, full home page |
+| computer-template072.html | Pomaii | 314055774039193896 | Nature travel site, forest green, destination cards |
+| computer-template073.html | Bloomfi | 314055774039193847 | DeFi stablecoin landing, lavender/navy, yield features |
+| computer-template074.html | Luckycharm | 314055774039193920 | Precision agriculture, minimal editorial, stats |
+| computer-template075.html | moonchic | 314055774039193939 | Pink beauty e-commerce, product grids, countdowns |
+| computer-template076.html | Daisy | 314055774039193985 | Beauty & spa salon, pink, service carousel |
+| computer-template077.html | yourstory | 314055774039193987 | Wedding agency, sage green, editorial |
+| computer-template078.html | Tasty Bites | 314055774039193906 | Food delivery, dark hero, orange CTAs |
+| computer-template079.html | Solaris | 314055774039189910 | Solar energy, green, savings calculator |
+| computer-template080.html | Rosalind Hart | 314055774039189925 | Wedding photographer, ivory, script |
+| computer-template081.html | NovaTech | 314055774039193930 | Electronics store, purple, product grid |
+| computer-template082.html | Ever After Atelier | 314055774039193931 | Luxury wedding planner, black & white |
+| computer-template083.html | Verdant | 314055774039193958 | Plant shop, glassmorphism, botanical |
+| computer-template084.html | chee | 314055774039193957 | Herbal pain patches, playful, tile grid |
+| computer-template085.html | BOTNIA | 314055774039193926 | Russian beauty e-commerce, beige, carousels |
+| computer-template086.html | Urban.Lab | 314055774039193959 | Russian coworking, lime/pink, tariffs |
+| computer-template087.html | Havenmark | 314055774039193933 | Real estate listings, green, filters |
+| computer-template088.html | STUDIO 7 | 314055774039193982 | Russian architecture, brutalist, team |
+| computer-template089.html | La Nostra Fashion | 314055774039193983 | Streetwear, black/white/yellow, editorial |
+| computer-template090.html | MODULARS | 314055774039193934 | Creative agency, forest/mint, arch images |
+| computer-template091.html | Elena Voss | 314055774039193889 | Wedding photographer, black & white |
+| computer-template092.html | Anna & Jason | 314055774039193904 | Wedding invitation, script, countdown |
+| computer-template093.html | wave | 314055774039193905 | Sleep drink, violet, wavy |
+| computer-template094.html | Petaldew | 314055774039193890 | K-beauty skincare, pink |
+| computer-template095.html | Orgaanic | 314055774039193929 | Farm equipment, dark/lime, rugged |
 
 Notes:
 - Pin numbers for templates 001–015 refer to the original 25-pin board; 016–025
-  to a re-fetched snapshot; 026–070 list the source pin ID.
+  to a re-fetched snapshot; 026–095 list the source pin ID.
 - Every page is a single self-contained HTML file (images inlined), with
   scroll-telling animations, matched Google Fonts, responsive layouts with
   mobile navigation, hover states, full nav + footer, and (026+) professional
   multi-section structure with clearly-labeled CSS.
-- Templates 046–070 add SEO-friendly markup (full meta/OG tags, semantic HTML)
+- Templates 046+ add SEO-friendly markup (full meta/OG tags, semantic HTML)
   and use FontAwesome / CSS frameworks where useful.
 - Thumbnails for the gallery live in `thumbs/`.
