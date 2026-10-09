@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <title>Amplify — Marketing that moves the needle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --surface: #f6f6f3;
+      --surface-2: #ededeb;
+      --ink: #16161a;
+      --muted: #5d5d66;
+      --line: #dcdcd8;
+      --paper: #ffffff;
+      --yellow: #ffc531;
+      --red: #ff5a3c;
+      --orange: #ff8a3d;
+      --pink: #ffb3c1;
+      --blue: #3d7bff;
+      --cyan: #29c6f5;
+      --nav: rgba(255,255,255,.84);
+      --shadow: 0 24px 60px rgba(22,22,26,.13);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111114;
+        --surface: #1b1b20;
+        --surface-2: #24242a;
+        --ink: #f7f6f2;
+        --muted: #b4b3bb;
+        --line: #34343a;
+        --paper: #17171b;
+        --nav: rgba(17,17,20,.86);
+        --shadow: 0 24px 60px rgba(0,0,0,.34);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a { font: inherit; }
+    a { color: inherit; }
+    svg { display: block; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      min-height: 72px; display: flex; align-items: center;
+      background: var(--nav); backdrop-filter: blur(16px);
+      transition: box-shadow .25s ease, border-color .25s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .site-nav.scrolled { border-color: var(--line); box-shadow: 0 8px 25px rgba(22,22,26,.07); }
+    .nav-inner { display: flex; align-items: center; justify-content: flex-end; gap: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { text-decoration: none; font-size: .92rem; font-weight: 600; position: relative; }
+    .nav-links a::after { content:""; position:absolute; left:0; bottom:-6px; width:100%; height:2px; background:var(--red); transform:scaleX(0); transform-origin:right; transition:transform .25s ease; }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 21px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(22,22,26,.16); }
+    .btn:focus-visible, .menu-toggle:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .btn.alt { background: transparent; color: var(--ink); }
+    .btn.alt:hover { background: var(--surface); }
+    .btn.white { background: white; color: #16161a; border-color: white; }
+    .menu-toggle { display:none; width:46px; height:46px; border:1px solid var(--line); border-radius:50%; background:var(--paper); color:var(--ink); align-items:center; justify-content:center; cursor:pointer; }
+
+    .hero { padding: 94px 0 56px; min-height: 760px; display: grid; place-items: center; overflow: hidden; }
+    .hero-copy { max-width: 920px; text-align: center; margin-inline: auto; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; margin:0 0 24px; font-size:.78rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:30px; height:5px; border-radius:99px; background:var(--yellow); box-shadow:12px 0 0 var(--red); }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2,h3 { font-family:"Baloo 2", sans-serif; }
+    h1 { margin-bottom:24px; font-size:clamp(3.3rem, 8.3vw, 7.8rem); line-height:.84; letter-spacing:-.055em; font-weight:800; }
+    .hero-copy > p:not(.eyebrow) { max-width:680px; margin:0 auto 32px; color:var(--muted); font-size:clamp(1rem, 2vw, 1.18rem); line-height:1.75; }
+    .hero-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+    .pill-stage { position:relative; height:440px; max-width:920px; margin:48px auto 0; perspective:1000px; }
+    .pill-stage::before { content:""; position:absolute; width:74%; height:26%; left:13%; bottom:8%; border-radius:50%; background:rgba(61,123,255,.13); filter:blur(35px); transform:rotate(-4deg); }
+    .pill {
+      --tx:0px; --ty:0px; --r:0deg; --delay:0s; --idle:0s;
+      position:absolute; left:50%; top:50%; min-width:max-content; padding:8px 31px 11px;
+      border-radius:32px; color:rgba(16,16,20,.88); border:1px solid rgba(22,22,26,.08);
+      font-family:"Baloo 2",sans-serif; font-size:clamp(2.35rem,5.1vw,4.8rem); font-weight:700; line-height:1;
+      letter-spacing:-.045em; box-shadow:0 14px 0 color-mix(in srgb, var(--pill-color) 78%, #111), 0 27px 35px rgba(22,22,26,.18), inset 0 2px 1px rgba(255,255,255,.35);
+      text-shadow:0 2px 0 rgba(255,255,255,.25), 0 4px 6px rgba(0,0,0,.11);
+      transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r));
+      opacity:0; transition:filter .25s ease;
+      will-change: transform, opacity;
+    }
+    .pill-stage.assembled .pill { animation: assemble .95s cubic-bezier(.18,1.5,.32,1) forwards var(--delay), idle 4.8s ease-in-out infinite calc(var(--delay) + 1s + var(--idle)); }
+    .pill:hover { animation: wiggle .48s ease both !important; filter:saturate(1.1); z-index:20; }
+    .pill.marketing { --pill-color:var(--yellow); background:var(--yellow); --tx:-38px; --ty:-138px; --r:-10deg; --delay:.05s; --idle:-1.2s; }
+    .pill.social { --pill-color:var(--orange); background:var(--orange); --tx:-34px; --ty:-66px; --r:2deg; --delay:.16s; --idle:-2.1s; }
+    .pill.seo { --pill-color:var(--red); background:var(--red); --tx:190px; --ty:-100px; --r:17deg; --delay:.27s; --idle:-.4s; z-index:3; }
+    .pill.email { --pill-color:var(--pink); background:var(--pink); --tx:0px; --ty:20px; --r:-3deg; --delay:.38s; --idle:-2.8s; z-index:5; }
+    .pill.convert { --pill-color:var(--blue); background:var(--blue); --tx:37px; --ty:100px; --r:6deg; --delay:.49s; --idle:-1.6s; color:#172b50; }
+    .pill.ads { --pill-color:var(--cyan); background:var(--cyan); --tx:72px; --ty:160px; --r:-8deg; --delay:.6s; --idle:-3.6s; z-index:8; }
+    @keyframes assemble { 0% { opacity:0; transform:translate(calc(-50% + var(--from-x,0px)),calc(-50% + var(--from-y,0px))) rotate(var(--from-r,0deg)) scale(.55); } 75% { opacity:1; } 100% { opacity:1; transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r)) scale(1); } }
+    .marketing{--from-x:-570px;--from-y:-330px;--from-r:-60deg}.social{--from-x:520px;--from-y:-140px;--from-r:55deg}.seo{--from-x:590px;--from-y:-390px;--from-r:110deg}.email{--from-x:-660px;--from-y:60px;--from-r:-25deg}.convert{--from-x:470px;--from-y:370px;--from-r:45deg}.ads{--from-x:-420px;--from-y:420px;--from-r:-80deg}
+    @keyframes idle { 0%,100% { transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r)); } 50% { transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty) - 7px)) rotate(calc(var(--r) + 1deg)); } }
+    @keyframes wiggle { 0%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r))}35%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty) - 13px)) rotate(calc(var(--r) - 3deg))}70%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty) - 9px)) rotate(calc(var(--r) + 2deg))}100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty) - 11px)) rotate(var(--r))} }
+
+    .stats { margin:24px auto 110px; background:var(--ink); color:var(--bg); border-radius:28px; display:grid; grid-template-columns:repeat(3,1fr); overflow:hidden; }
+    .stat { padding:33px 38px; min-height:126px; display:flex; flex-direction:column; justify-content:center; }
+    .stat + .stat { border-left:1px solid color-mix(in srgb, var(--bg) 22%, transparent); }
+    .stat strong { font-family:"Baloo 2",sans-serif; font-size:clamp(2.2rem,5vw,4rem); line-height:.95; }
+    .stat span { color:color-mix(in srgb, var(--bg) 72%, transparent); margin-top:8px; font-size:.9rem; }
+    section { scroll-margin-top:90px; }
+    .section { padding:106px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:34px; margin-bottom:44px; }
+    .section-head h2 { margin:0; max-width:690px; font-size:clamp(2.5rem,5.4vw,5rem); line-height:.94; letter-spacing:-.045em; }
+    .section-head p { max-width:390px; margin:0; color:var(--muted); line-height:1.7; }
+
+    .services { background:var(--surface); border-block:1px solid var(--line); overflow:hidden; }
+    .marquee { width:100%; max-width:100%; display:flex; gap:16px; margin-bottom:56px; overflow:hidden; }
+    .marquee span { flex:none; display:inline-flex; align-items:center; gap:16px; font-family:"Baloo 2"; font-weight:800; font-size:clamp(1.4rem,3vw,2.1rem); white-space:nowrap; animation:marquee 24s linear infinite; }
+    .marquee i { width:11px;height:11px;border-radius:50%;background:var(--red); }
+    @keyframes marquee { to { transform:translateX(-50%); } }
+    .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .service-card { padding:30px; min-height:260px; background:var(--paper); border:1px solid var(--line); border-radius:20px; position:relative; overflow:hidden; transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+    .service-card::after { content:""; position:absolute; width:100px;height:100px;border-radius:50%; right:-50px;bottom:-50px;background:var(--accent);opacity:.22;transition:transform .35s ease; }
+    .service-card:hover { transform:translateY(-7px); box-shadow:var(--shadow); border-color:color-mix(in srgb,var(--accent) 70%,var(--line)); }
+    .service-card:hover::after { transform:scale(2.6); }
+    .icon { width:50px;height:50px;display:grid;place-items:center;border-radius:14px;background:var(--accent);color:#141418;margin-bottom:40px;position:relative;z-index:2; }
+    .icon svg { width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+    .service-card h3 { font-size:1.65rem; margin-bottom:7px;position:relative;z-index:2; }
+    .service-card p { color:var(--muted);font-size:.94rem;line-height:1.6;margin:0;position:relative;z-index:2; }
+
+    .work-grid { display:grid;grid-template-columns:1.1fr .9fr;gap:18px; }
+    .case-card { min-height:400px;padding:32px;border-radius:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;color:#141418;transition:transform .3s ease; }
+    .case-card:hover { transform:translateY(-6px); }
+    .case-card:first-child { grid-row:span 2; min-height:818px;background:var(--yellow); }
+    .case-card:nth-child(2) { background:var(--pink); }
+    .case-card:nth-child(3) { background:var(--cyan); }
+    .case-top { display:flex;justify-content:space-between;align-items:center;position:relative;z-index:3; }
+    .case-type { font-size:.77rem;font-weight:700;text-transform:uppercase;letter-spacing:.11em; }
+    .arrow { width:43px;height:43px;border:1px solid rgba(20,20,24,.4);border-radius:50%;display:grid;place-items:center;transition:transform .25s ease,background .25s ease; }
+    .case-card:hover .arrow { transform:rotate(45deg);background:#fff; }
+    .case-card h3 { font-size:clamp(2.2rem,5vw,4.8rem);line-height:.93;letter-spacing:-.04em;margin:0;position:relative;z-index:3; }
+    .case-card:nth-child(n+2) h3 { font-size:clamp(2rem,3.5vw,3.2rem); }
+    .case-art { position:absolute;inset:0;pointer-events:none; }
+    .orbit { position:absolute;border:2px solid rgba(20,20,24,.35);border-radius:50%;width:460px;height:460px;right:-160px;top:120px; }
+    .orbit::before,.orbit::after { content:"";position:absolute;border:inherit;border-radius:inherit;inset:50px; }.orbit::after{inset:110px}.case-card:hover .orbit{animation:spin 8s linear infinite}@keyframes spin{to{transform:rotate(1turn)}}
+    .bars { position:absolute;right:30px;bottom:120px;display:flex;gap:12px;align-items:end; }.bars i{display:block;width:44px;border-radius:8px 8px 0 0;background:rgba(20,20,24,.22);transition:height .45s ease}.bars i:nth-child(1){height:70px}.bars i:nth-child(2){height:130px}.bars i:nth-child(3){height:190px}.case-card:hover .bars i:nth-child(1){height:130px}.case-card:hover .bars i:nth-child(3){height:230px}
+    .rings { position:absolute;width:240px;height:240px;border:50px solid rgba(20,20,24,.13);border-radius:50%;right:-25px;top:85px;box-shadow:0 0 0 24px rgba(20,20,24,.06); }
+
+    .process { background:var(--ink);color:var(--bg); }
+    .process .section-head p { color:color-mix(in srgb,var(--bg) 68%,transparent); }
+    .process-list { border-top:1px solid color-mix(in srgb,var(--bg) 24%,transparent); }
+    .step { display:grid;grid-template-columns:90px 1fr 1.3fr;gap:30px;align-items:center;padding:32px 0;border-bottom:1px solid color-mix(in srgb,var(--bg) 24%,transparent);transition:padding .25s ease; }
+    .step:hover { padding-left:12px; }
+    .step-num { font-family:"Baloo 2";font-size:1.3rem;color:var(--yellow); }
+    .step h3 { font-size:2rem;margin:0; }
+    .step p { margin:0;line-height:1.65;color:color-mix(in srgb,var(--bg) 70%,transparent); }
+
+    .quotes { display:grid;grid-template-columns:repeat(2,1fr);gap:18px; }
+    blockquote { margin:0;padding:34px;border-radius:20px;background:var(--surface);border:1px solid var(--line); }
+    .quote-mark { font-family:"Baloo 2";font-size:4.8rem;line-height:.55;color:var(--red); }
+    blockquote p { font-family:"Baloo 2";font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.18;font-weight:600;letter-spacing:-.02em;margin:22px 0 28px; }
+    cite { font-style:normal;color:var(--muted);font-size:.9rem; }
+    cite strong { display:block;color:var(--ink);margin-bottom:5px; }
+    .cta { padding:34px 0 110px; }
+    .cta-card { background:var(--ink);color:var(--bg);border-radius:28px;padding:clamp(36px,7vw,82px);display:flex;align-items:center;justify-content:space-between;gap:30px;position:relative;overflow:hidden; }
+    .cta-card::before { content:"";position:absolute;width:250px;height:250px;border:55px solid var(--blue);border-radius:50%;right:20%;top:54%;transform:translateY(-50%);opacity:.45; }
+    .cta-card h2 { margin:0;max-width:650px;font-size:clamp(2.5rem,5.6vw,5.3rem);line-height:.92;letter-spacing:-.045em;position:relative; }
+    .cta-card .btn { position:relative;white-space:nowrap; }
+    footer { background:var(--ink);color:var(--bg);padding:40px 0; }
+    .footer-inner { display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap; }
+    .footer-links { display:flex;flex-wrap:wrap;gap:22px; }
+    footer a { text-decoration:none;font-size:.86rem;color:color-mix(in srgb,var(--bg) 75%,transparent); }
+    footer a:hover { color:var(--yellow); }
+    footer small { color:color-mix(in srgb,var(--bg) 58%,transparent); }
+
+    .reveal { opacity:1; transform:none; }
+    @supports (animation-timeline: view()) {
+      .reveal { animation:scroll-reveal both linear; animation-timeline:view(); animation-range:entry 0% cover 28%; }
+      @keyframes scroll-reveal { from { transform:translateY(28px); } to { transform:none; } }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width:min(100% - 28px, 1180px); }
+      .site-nav { min-height:64px; }
+      .nav-inner { justify-content:flex-end; }
+      .menu-toggle { display:flex; position:relative;z-index:102; }
+      .nav-links { position:fixed;left:14px;right:14px;top:72px;padding:22px 28px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);display:none;flex-direction:column;align-items:stretch; z-index:101; }
+      .nav-links.open { display:flex;animation:menu-in .25s ease both; }
+      @keyframes menu-in { from { transform:translateY(-14px);opacity:0; } to { transform:none;opacity:1; } }
+      .nav-links a { font-size:1.05rem;padding:9px 0; color:var(--ink); }
+      .site-nav .btn { min-height:44px;padding:0 16px;font-size:.88rem; }
+      .hero { padding-top:65px;min-height:auto; }
+      h1 { font-size:clamp(3.3rem,16vw,5.5rem); }
+      .pill-stage { height:330px;margin-top:34px;transform:scale(.78);transform-origin:center top;width:128%;margin-left:-14%; }
+      .stats { grid-template-columns:1fr;margin-top:-40px;margin-bottom:70px;border-radius:20px; }
+      .stat { padding:25px 26px;min-height:100px; }
+      .stat + .stat { border-left:0;border-top:1px solid color-mix(in srgb,var(--bg) 22%,transparent); }
+      .section { padding:76px 0; }
+      .section-head { display:block;margin-bottom:32px; }
+      .section-head p { margin-top:18px; }
+      .marquee span { animation:none; white-space:normal; flex:1; flex-wrap:wrap; justify-content:center; padding-inline:14px; }
+      .marquee span + span { display:none; }
+      .service-grid { grid-template-columns:1fr; }
+      .service-card { min-height:235px; }
+      .work-grid { grid-template-columns:1fr; }
+      .case-card:first-child { grid-row:auto; min-height:520px; }
+      .case-card { min-height:350px; }
+      .step { grid-template-columns:52px 1fr;gap:15px; }
+      .step p { grid-column:2; }
+      .quotes { grid-template-columns:1fr; }
+      .cta-card { align-items:flex-start;flex-direction:column; }
+      .cta-card::before { right:-100px;top:50%; }
+    }
+    @media (max-width: 440px) {
+      .site-nav .btn { display:none; }
+      .pill-stage { transform:scale(.61);width:160%;margin-left:-30%;height:290px; }
+      .stats { margin-top:-80px; }
+      .case-card { padding:24px; }
+      .cta { padding-bottom:70px; }
+      .footer-inner { align-items:flex-start;flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation:none !important;transition-duration:.01ms !important; }
+      .reveal,.pill { opacity:1 !important;transform:none !important; }
+      .pill { transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r)) !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <div class="nav-links" id="navLinks">
+        <a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a>
+      </div>
+      <a class="btn" href="#contact">Start here <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="wrap">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Digital marketing agency</p>
+          <h1>Marketing that actually moves the needle.</h1>
+          <p>SEO, ads, social and email — one team growing your pipeline end to end.</p>
+          <div class="hero-actions"><a class="btn" href="#services">Explore services</a><a class="btn alt" href="#work">See our work</a></div>
+        </div>
+        <div class="pill-stage" aria-label="Our marketing disciplines">
+          <div class="pill marketing">marketing</div><div class="pill social">social media</div><div class="pill seo">SEO</div><div class="pill email">email marketing</div><div class="pill convert">conversions</div><div class="pill ads">ads</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap stats reveal" aria-label="Agency results">
+      <div class="stat"><strong class="counter" data-value="320" data-suffix="%">320%</strong><span>Average ROI</span></div>
+      <div class="stat"><strong class="counter" data-value="120" data-suffix="+">120+</strong><span>Brands grown</span></div>
+      <div class="stat"><strong class="counter" data-value="4.2" data-decimals="1" data-prefix="$" data-suffix="M">$4.2M</strong><span>Ad spend managed</span></div>
+    </div>
+
+    <section class="section services" id="services">
+      <div class="marquee" aria-hidden="true"><span>Search <i></i> Paid media <i></i> Social <i></i> Email <i></i> Content <i></i> Analytics <i></i></span><span>Search <i></i> Paid media <i></i> Social <i></i> Email <i></i> Content <i></i> Analytics <i></i></span></div>
+      <div class="wrap">
+        <div class="section-head reveal"><h2>One sharp team. Every growth channel.</h2><p>Specialists collaborate around one strategy, so every campaign compounds instead of competing.</p></div>
+        <div class="service-grid">
+          <article class="service-card reveal" style="--accent:var(--yellow);--stagger:0ms"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 11h6M11 8v6"/></svg></div><h3>SEO</h3><p>Technical foundations, content and authority that earn durable organic visibility.</p></article>
+          <article class="service-card reveal" style="--accent:var(--red);--stagger:120ms"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 13v6a1 1 0 0 0 1 1h3l2-7M4 13h4l10-6v10L8 13M18 10l2-2M18 14l2 2"/></svg></div><h3>Paid Ads</h3><p>Focused search and social campaigns built around profitable acquisition.</p></article>
+          <article class="service-card reveal" style="--accent:var(--orange);--stagger:240ms"><div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 1 1 0-8 5 5 0 0 1 9.7-1.5A4.5 4.5 0 1 1 18 18H7Z"/><path d="M8 14h8M12 10v8"/></svg></div><h3>Social Media</h3><p>Channel-native ideas and community programs that keep your brand in the conversation.</p></article>
+          <article class="service-card reveal" style="--accent:var(--pink);--stagger:0ms"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><h3>Email Marketing</h3><p>Lifecycle journeys and campaigns that turn attention into repeat revenue.</p></article>
+          <article class="service-card reveal" style="--accent:var(--blue);--stagger:120ms"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5V6a2 2 0 0 1 2-2h10l4 4v11.5a.5.5 0 0 1-.8.4L12 15l-7.2 4.9a.5.5 0 0 1-.8-.4Z"/><path d="M8 8h6M8 11h8"/></svg></div><h3>Content</h3><p>Useful stories, landing pages and creative systems that make people care.</p></article>
+          <article class="service-card reveal" style="--accent:var(--cyan);--stagger:240ms"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><circle cx="4" cy="7" r="2"/><circle cx="10" cy="3" r="2"/><circle cx="16" cy="10" r="2"/></svg></div><h3>Analytics</h3><p>Clear dashboards and experiments that turn performance data into the next move.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><h2>Work measured in momentum.</h2><p>Three different markets. One common result: clearer positioning and stronger demand.</p></div>
+        <div class="work-grid">
+          <article class="case-card reveal"><div class="case-top"><span class="case-type">SaaS / Organic growth</span><span class="arrow" aria-hidden="true">↗</span></div><div class="case-art"><div class="orbit"></div></div><h3>+212% organic traffic</h3></article>
+          <article class="case-card reveal" style="--stagger:120ms"><div class="case-top"><span class="case-type">E-commerce / Paid media</span><span class="arrow" aria-hidden="true">↗</span></div><div class="case-art"><div class="bars"><i></i><i></i><i></i></div></div><h3>4.1x ROAS</h3></article>
+          <article class="case-card reveal" style="--stagger:240ms"><div class="case-top"><span class="case-type">Local / Search</span><span class="arrow" aria-hidden="true">↗</span></div><div class="case-art"><div class="rings"></div></div><h3>38% more bookings</h3></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="process">
+      <div class="wrap">
+        <div class="section-head reveal"><h2>A clear path from hunch to growth.</h2><p>We move quickly, show the work and keep the decisions tied to evidence.</p></div>
+        <div class="process-list">
+          <div class="step reveal"><span class="step-num">01</span><h3>Audit</h3><p>Find the leaks, missed demand and strongest opportunities across your funnel.</p></div>
+          <div class="step reveal"><span class="step-num">02</span><h3>Strategy</h3><p>Set the channel mix, creative direction and targets around your real economics.</p></div>
+          <div class="step reveal"><span class="step-num">03</span><h3>Launch</h3><p>Ship focused campaigns, landing pages and measurement with speed and care.</p></div>
+          <div class="step reveal"><span class="step-num">04</span><h3>Scale</h3><p>Read the signal, improve the winners and reinvest where returns are strongest.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Client testimonials">
+      <div class="wrap">
+        <div class="section-head reveal"><h2>Good numbers. Better partnerships.</h2><p>Built for teams who want honest thinking, sharp execution and no mystery reports.</p></div>
+        <div class="quotes">
+          <blockquote class="reveal"><span class="quote-mark">“</span><p>They found the story inside our data and turned it into a campaign customers finally understood.</p><cite><strong>Maya Chen</strong>VP of Growth, Northstar</cite></blockquote>
+          <blockquote class="reveal" style="--stagger:120ms"><span class="quote-mark">“</span><p>Every channel now feels connected. We know what is working, why it works, and what to do next.</p><cite><strong>Jon Bell</strong>Founder, Fieldwell</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact"><div class="wrap"><div class="cta-card reveal"><h2>Ready to amplify your growth?</h2><a class="btn white" href="#process">Review our process <span aria-hidden="true">↗</span></a></div></div></section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><div class="footer-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">Top</a></div><small>© 2026 Amplify</small></div></footer>
+
+  <script>
+    (function(){
+      var nav=document.querySelector('.site-nav');
+      var menu=document.querySelector('.menu-toggle');
+      var links=document.getElementById('navLinks');
+      window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>12)},{passive:true});
+      menu.addEventListener('click',function(){var open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close menu':'Open menu');});
+      links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open menu');}});
+
+      var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var stage=document.querySelector('.pill-stage');
+      var counters=document.querySelectorAll('.counter');
+      function counterText(el,value){return (el.dataset.prefix||'')+value.toFixed(Number(el.dataset.decimals||0))+(el.dataset.suffix||'');}
+      if(reduced){stage.classList.add('assembled');counters.forEach(function(el){el.textContent=counterText(el,Number(el.dataset.value))});return;}
+      var stageObs=new IntersectionObserver(function(entries){if(entries[0].isIntersecting){stage.classList.add('assembled');stageObs.disconnect();}},{threshold:.2});stageObs.observe(stage);
+      var counted=false, stats=document.querySelector('.stats');
+      function maybeCount(){
+        var r=stats.getBoundingClientRect();
+        if(!counted && r.top<innerHeight*.88 && r.bottom>0){
+          counted=true;
+          counters.forEach(function(el){
+            var end=Number(el.dataset.value),dec=Number(el.dataset.decimals||0),startValue=end*.82,start=performance.now(),duration=1100;
+            function tick(now){var p=Math.min(1,(now-start)/duration),ease=1-Math.pow(1-p,3);el.textContent=counterText(el,startValue+(end-startValue)*ease);if(p<1)requestAnimationFrame(tick)}
+            requestAnimationFrame(tick);
+          });
+          window.removeEventListener('scroll',maybeCount);
+        }
+      }
+      window.addEventListener('scroll',maybeCount,{passive:true});
+    })();
+  </script>
+</body>
+</html>
